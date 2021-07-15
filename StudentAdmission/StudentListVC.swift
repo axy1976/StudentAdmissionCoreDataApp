@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class StudentListVC: UIViewController {
 
@@ -45,30 +46,28 @@ class StudentListVC: UIViewController {
     @objc private func addNewStudent()
     {
         let alert = UIAlertController(title: "Add Student", message: "Please Fill Down The Details", preferredStyle: .alert)
-        /*alert.addTextField { (tf) in tf.placeholder = "name"}
-        alert.addTextField { (tf) in tf.placeholder = "email"}*/
-        alert.addTextField { (tf) in
-            tf.placeholder = "SPID"
-        }
         alert.addTextField { (tf) in
             tf.placeholder = "Name"
         }
         alert.addTextField { (tf) in
-            tf.placeholder = "Division"
+            tf.placeholder = "Email"
+        }
+        alert.addTextField { (tf) in
+            tf.placeholder = "Department"
         }
         let action = UIAlertAction(title:"Submit", style: .default) { (_) in
-            guard let spid = alert.textFields?[0].text,
-                  let name = alert.textFields?[1].text,
-                  let div = alert.textFields?[2].text
+            guard let name = alert.textFields?[0].text,
+                  let email = alert.textFields?[1].text,
+                  let dept = alert.textFields?[2].text
             else{
                 return
             }
             
             
-            CoreDataHandler.shared.insert(spid: spid, name: name, div: div, pwd: spid) { [weak self] in
-                print(spid)
+            CoreDataHandler.shared.insert(name: name, email: email, dept: dept, pwd: email) { [weak self] in
+                print(email)
                 print(name)
-                print(div)
+                print(dept)
                 let vc = StudentListVC()
                 self?.navigationController?.pushViewController(vc, animated: false)
                 
@@ -94,7 +93,7 @@ extension StudentListVC: UITableViewDataSource ,UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stud", for: indexPath)
         let stud = studArray[indexPath.row]
-        cell.textLabel?.text = "\(stud.name) \t | \t \(stud.email) \t | \t \(stud.dept) \t | \(stud.pwd)"
+        cell.textLabel?.text = "\(stud.name!) \t | \t \(stud.email!) \t | \t \(stud.dept!) \t | \(stud.pwd!)"
         return cell
     }
     
@@ -114,16 +113,16 @@ extension StudentListVC: UITableViewDataSource ,UITableViewDelegate
         let stud = studArray[indexPath.row]
 
         alert.addTextField { (tf) in
-            tf.text = "\(String(stud.name))"
+            tf.text = "\(String(stud.name!))"
         }
         alert.addTextField { (tf) in
-            tf.text = "\(String(stud.email))"
+            tf.text = "\(String(stud.email!))"
         }
         alert.addTextField { (tf) in
-            tf.text = "\(String(stud.dept))"
+            tf.text = "\(String(stud.dept!))"
         }
         alert.addTextField { (tf) in
-            tf.text = "\(String(stud.pwd))"
+            tf.text = "\(String(stud.pwd!))"
         }
         let action = UIAlertAction(title:"Submit", style: .default) { (_) in
             guard let name = alert.textFields?[0].text,

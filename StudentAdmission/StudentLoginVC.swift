@@ -1,5 +1,5 @@
 //
-//  MainVC.swift
+//  StudentLoginVC.swift
 //  StudentAdmission
 //
 //  Created by Akshay Jangir on 13/07/21.
@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
-class MainVC: UIViewController {
+class StudentLoginVC: UIViewController {
 
     private var studArray = [Student]()
     
@@ -32,6 +33,7 @@ class MainVC: UIViewController {
         textView.placeholder = "Enter Password"
         textView.textAlignment = .center
         textView.backgroundColor = .white
+        textView.isSecureTextEntry = true
         textView.layer.cornerRadius = 10
         return textView
     }()
@@ -89,8 +91,8 @@ class MainVC: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        logo.frame = CGRect(x: view.width/2-150, y: 130, width: 300, height: 220)
-        username.frame = CGRect(x: 30, y: logo.bottom + 20, width: view.width - 60, height: 40)
+        logo.frame = CGRect(x: view.width/2-100, y: 130, width: 200, height: 150)
+        username.frame = CGRect(x: 30, y: logo.bottom + 100, width: view.width - 60, height: 40)
         password.frame = CGRect(x: 30, y: username.bottom + 20, width: view.width - 60, height: 40)
         btn.frame = CGRect(x: 30, y: password.bottom + 20, width: view.width - 60, height: 40)
     }

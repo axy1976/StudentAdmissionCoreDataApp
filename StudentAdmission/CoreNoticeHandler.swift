@@ -29,7 +29,7 @@ class CoreNoticeHandler
     
     func insert(notice:String, completion: @escaping () -> Void)
     {
-        let nt = Notice(context: managedObjectContext)
+        let nt = Notice(context: managedObjectContext!)
         nt.notice = notice
         save()
         completion()

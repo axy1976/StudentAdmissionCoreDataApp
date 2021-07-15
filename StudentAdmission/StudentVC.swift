@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class StudentVC: UIViewController {
 
@@ -65,7 +66,7 @@ class StudentVC: UIViewController {
                 let alert = UIAlertController(title: "Add New Password", message: "Please Change Your Password", preferredStyle: .alert)
                
                 alert.addTextField { (tf) in
-                    tf.placeholder = "\(self.studArray[i].pwd)"
+                    tf.placeholder = "\(self.studArray[i].pwd!)"
                 }
                 let action = UIAlertAction(title:"Submit", style: .default) { (_) in
                     guard let pwd = alert.textFields?[0].text
@@ -73,9 +74,9 @@ class StudentVC: UIViewController {
                         return
                     }
                                     
-                    CoreDataHandler.shared.updatepwd(stud: stud, pwd: pwd, completion: {
+                    CoreDataHandler.shared.changepwd(stud: stud, pwd: pwd, completion: {
                         [weak self] in
-                        print(self!.studArray[i].name)
+                        print(self!.studArray[i].name!)
                             print(pwd)
                             let vc = StudentVC()
                             self?.navigationController?.pushViewController(vc, animated: false)

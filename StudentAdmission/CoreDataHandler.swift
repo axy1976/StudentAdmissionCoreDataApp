@@ -27,12 +27,12 @@ class CoreDataHandler
         appDelegate.saveContext()
     }
     
-    func insert(spid:String ,name:String ,div:String , pwd:String, completion: @escaping () -> Void)
+    func insert(name:String, email:String,dept:String , pwd:String, completion: @escaping () -> Void)
     {
-        let stud = Student(context: managedObjectContext)
-        stud.spid = spid
+        let stud = Student(context: managedObjectContext!)
+        stud.email = email
         stud.name = name
-        stud.div = div
+        stud.dept = dept
         stud.pwd = pwd
         
         save()

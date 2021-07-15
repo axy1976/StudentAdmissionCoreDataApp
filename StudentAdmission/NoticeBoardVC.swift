@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class NoticeBoardVC: UIViewController {
 	
@@ -66,7 +67,7 @@ extension NoticeBoardVC: UITableViewDataSource ,UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stud", for: indexPath)
         let not = noticeArray[indexPath.row]
-        cell.textLabel?.text = "\(not.notice)"
+        cell.textLabel?.text = "\(not.notice!)"
         return cell
     }
     
@@ -76,7 +77,7 @@ extension NoticeBoardVC: UITableViewDataSource ,UITableViewDelegate
         let not = noticeArray[indexPath.row]
 
         alert.addTextField { (tf) in
-            tf.text = "\(String(not.notice))"
+            tf.text = "\(String(not.notice!))"
         }
         let action = UIAlertAction(title:"Submit", style: .default) { (_) in
             guard let notice = alert.textFields?[0].text
